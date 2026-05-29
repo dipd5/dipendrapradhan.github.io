@@ -5,7 +5,7 @@ description: "On destiny, karma, illness, and the circles we keep returning to."
 pubDate: 2021-04-04
 ---
 
-![Dark Circles](/images/dark-circles.jpg)
+![Dark Circles](/story-images/dark-circles.jpg)
 
 As I sink into the armchair of the old hospital building, I find myself retracing the journey that brought me here.
 
