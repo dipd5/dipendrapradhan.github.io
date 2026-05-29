@@ -1,7 +1,8 @@
 import { defineConfig } from "astro/config";
 
 export default defineConfig({
-  site: "https://dipendrapradhan.dpdns.org",
+  site: "https://dipd5.github.io",
+  base: "/dipendrapradhan.github.io/",
   output: "static",
   image: {
     service: {

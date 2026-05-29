@@ -3,6 +3,7 @@ import BaseLayout from "@layouts/BaseLayout.astro";
 import { getStories } from "@lib/archive";
 import { formatGardenDate } from "@lib/date";
 import { getReadingTime } from "@lib/readingTime";
+import { withBase } from "@lib/path";
 
 const stories = await getStories();
 ---
@@ -16,7 +17,7 @@ const stories = await getStories();
 
   <div class="story-list">
     {stories.map((story) => (
-      <a class="story-row" href={`/stories/${story.id}/`}>
+      <a class="story-row" href={withBase(`/stories/${story.id}/`)}>
         <span class="meta">{formatGardenDate(story.data.pubDate)} · {getReadingTime(story.body ?? "")}</span>
         <h2>{story.data.title}</h2>
         <span class="archive-excerpt">{story.data.description}</span>

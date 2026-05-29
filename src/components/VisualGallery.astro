@@ -1,6 +1,7 @@
 ---
 import { Image } from "astro:assets";
 import type { Visual } from "@lib/visuals";
+import { withBase } from "@lib/path";
 
 const { visuals } = Astro.props as { visuals: Visual[] };
 ---
@@ -14,7 +15,7 @@ const { visuals } = Astro.props as { visuals: Visual[] };
           class="gallery-item"
           type="button"
           data-index={index}
-          data-full={visual.image.src}
+          data-full={withBase(visual.image.src)}
           data-alt={visual.caption || visual.title}
         >
           <Image src={visual.image} alt={visual.caption || visual.title} widths={[360, 540, 760, 980]} sizes="(max-width: 560px) 100vw, (max-width: 820px) 50vw, 33vw" loading="lazy" />

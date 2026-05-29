@@ -6,6 +6,7 @@ import { getArchiveEntries, getStories } from "@lib/archive";
 import { formatGardenDate } from "@lib/date";
 import { getFeaturedVisual } from "@lib/visuals";
 import { getReadingTime } from "@lib/readingTime";
+import { withBase } from "@lib/path";
 
 const stories = await getStories();
 const featuredStory = stories.find((story) => story.data.featured) ?? stories[0];
@@ -24,10 +25,10 @@ const recent = (await getArchiveEntries()).slice(0, 5);
     <div>
       <div class="section-heading">
         <h2>Featured Visual</h2>
-        <a class="quiet-link" href="/visuals/">All visuals</a>
+        <a class="quiet-link" href={withBase("/visuals/")}>All visuals</a>
       </div>
       {featuredVisual ? (
-        <a class="gallery-item" href="/visuals/">
+        <a class="gallery-item" href={withBase("/visuals/")}>
           <Image src={featuredVisual.image} alt={featuredVisual.caption || featuredVisual.title} widths={[520, 820, 1120]} sizes="(max-width: 820px) 100vw, 60vw" loading="eager" />
           {featuredVisual.caption && <span class="caption">{featuredVisual.caption}</span>}
         </a>
@@ -39,10 +40,10 @@ const recent = (await getArchiveEntries()).slice(0, 5);
     <div>
       <div class="section-heading">
         <h2>Featured Story</h2>
-        <a class="quiet-link" href="/stories/">All stories</a>
+        <a class="quiet-link" href={withBase("/stories/")}>All stories</a>
       </div>
       {featuredStory && (
-        <a class="story-row surface" href={`/stories/${featuredStory.id}/`}>
+        <a class="story-row surface" href={withBase(`/stories/${featuredStory.id}/`)}>
           <span class="meta">{formatGardenDate(featuredStory.data.pubDate)} · {getReadingTime(featuredStory.body ?? "")}</span>
           <h3>{featuredStory.data.title}</h3>
           <span class="archive-excerpt">{featuredStory.data.description}</span>
@@ -54,7 +55,7 @@ const recent = (await getArchiveEntries()).slice(0, 5);
   <section class="section" aria-labelledby="recent-title">
     <div class="section-heading">
       <h2 id="recent-title">Recent Additions</h2>
-      <a class="quiet-link" href="/archive/">Enter archive</a>
+      <a class="quiet-link" href={withBase("/archive/")}>Enter archive</a>
     </div>
     <ArchiveList entries={recent} showTools={false} />
   </section>

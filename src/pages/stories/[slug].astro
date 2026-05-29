@@ -4,6 +4,7 @@ import { render } from "astro:content";
 import { getStories } from "@lib/archive";
 import { formatGardenDate } from "@lib/date";
 import { getReadingTime } from "@lib/readingTime";
+import { withBase } from "@lib/path";
 
 export async function getStaticPaths() {
   const stories = await getStories();
@@ -34,10 +35,10 @@ const longEnoughForToc = headings.length >= 2;
 
       <nav class="story-nav" aria-label="Story navigation">
         <span>
-          {previous && <a href={`/stories/${previous.id}/`}><span class="meta">Previous</span><br />{previous.data.title}</a>}
+          {previous && <a href={withBase(`/stories/${previous.id}/`)}><span class="meta">Previous</span><br />{previous.data.title}</a>}
         </span>
         <span>
-          {next && <a href={`/stories/${next.id}/`}><span class="meta">Next</span><br />{next.data.title}</a>}
+          {next && <a href={withBase(`/stories/${next.id}/`)}><span class="meta">Next</span><br />{next.data.title}</a>}
         </span>
       </nav>
     </div>

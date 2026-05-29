@@ -2,6 +2,7 @@ import { getCollection } from "astro:content";
 import type { CollectionEntry } from "astro:content";
 import { getReadingTime } from "@lib/readingTime";
 import { getVisuals, type Visual } from "@lib/visuals";
+import { withBase } from "@lib/path";
 
 export type StoryEntry = CollectionEntry<"stories">;
 
@@ -42,7 +43,7 @@ export async function getArchiveEntries(): Promise<ArchiveEntry[]> {
       type: "Story",
       title: story.data.title,
       date: story.data.pubDate,
-      href: `/stories/${story.id}/`,
+      href: withBase(`/stories/${story.id}/`),
       excerpt: story.data.description ?? body.slice(0, 180),
       readingTime: getReadingTime(body),
       body
@@ -54,7 +55,7 @@ export async function getArchiveEntries(): Promise<ArchiveEntry[]> {
     type: "Visual",
     title: visual.title,
     date: visual.date,
-    href: `/visuals/#${visual.slug}`,
+    href: withBase(`/visuals/#${visual.slug}`),
     excerpt: visual.caption || "A visual note from the archive.",
     image: visual.image,
     caption: visual.caption
