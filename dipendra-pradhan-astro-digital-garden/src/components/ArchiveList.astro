@@ -1,0 +1,86 @@
+---
+import { Image } from "astro:assets";
+import { formatGardenDate } from "@lib/date";
+import type { ArchiveEntry } from "@lib/archive";
+
+const { entries, showTools = true } = Astro.props as { entries: ArchiveEntry[]; showTools?: boolean };
+---
+
+{showTools && (
+  <div class="archive-tools" data-archive-tools>
+    <label>
+      <span class="eyebrow">Search</span>
+      <input class="search-input" data-search-input type="search" placeholder="Search the archive" autocomplete="off" />
+    </label>
+    <div class="filter-group" aria-label="Archive filter">
+      {["All", "Visuals", "Stories"].map((filter) => (
+        <button class="filter-button" type="button" data-filter={filter.toLowerCase()} aria-pressed={filter === "All" ? "true" : "false"}>
+          {filter}
+        </button>
+      ))}
+    </div>
+  </div>
+)}
+
+<div class="archive-list" data-archive-list>
+  {entries.map((entry) => (
+    <a
+      class="archive-entry"
+      href={entry.href}
+      data-entry
+      data-type={entry.type.toLowerCase()}
+      data-search={entry.type === "Story" ? `${entry.title} ${entry.excerpt} ${entry.body} ${entry.type}` : `${entry.title} ${entry.excerpt} ${entry.caption} ${entry.type}`}
+    >
+      <span class="archive-thumb" aria-hidden="true">
+        {entry.type === "Visual" ? (
+          <Image src={entry.image} alt="" width={180} loading="lazy" />
+        ) : (
+          <span></span>
+        )}
+      </span>
+      <span>
+        <span class="meta">{formatGardenDate(entry.date)} · {entry.type}{entry.type === "Story" ? ` · ${entry.readingTime}` : ""}</span>
+        <h3>{entry.title}</h3>
+        <span class="archive-excerpt">{entry.excerpt}</span>
+      </span>
+    </a>
+  ))}
+</div>
+
+<p class="empty-note" data-empty-state hidden>No entries match that search.</p>
+
+<script>
+  const root = document.querySelector("[data-archive-list]");
+  const input = document.querySelector("[data-search-input]") as HTMLInputElement | null;
+  const buttons = [...document.querySelectorAll("[data-filter]")] as HTMLButtonElement[];
+  const empty = document.querySelector("[data-empty-state]") as HTMLElement | null;
+  const entries = [...document.querySelectorAll("[data-entry]")] as HTMLElement[];
+  let activeFilter = "all";
+
+  function updateArchive() {
+    const query = input?.value.trim().toLowerCase() ?? "";
+    let visible = 0;
+
+    for (const entry of entries) {
+      const type = entry.dataset.type ?? "";
+      const text = entry.dataset.search?.toLowerCase() ?? "";
+      const typeMatch = activeFilter === "all" || (activeFilter === "visuals" && type === "visual") || (activeFilter === "stories" && type === "story");
+      const searchMatch = !query || text.includes(query);
+      const show = typeMatch && searchMatch;
+      entry.hidden = !show;
+      if (show) visible += 1;
+    }
+
+    if (empty) empty.hidden = visible > 0;
+    root?.setAttribute("aria-busy", "false");
+  }
+
+  input?.addEventListener("input", updateArchive);
+  for (const button of buttons) {
+    button.addEventListener("click", () => {
+      activeFilter = button.dataset.filter ?? "all";
+      for (const item of buttons) item.setAttribute("aria-pressed", String(item === button));
+      updateArchive();
+    });
+  }
+</script>

@@ -1,0 +1,79 @@
+---
+import { Image } from "astro:assets";
+import type { Visual } from "@lib/visuals";
+
+const { visuals } = Astro.props as { visuals: Visual[] };
+---
+
+{visuals.length > 0 ? (
+  <>
+    <div class="gallery" data-gallery>
+      {visuals.map((visual, index) => (
+        <button
+          id={visual.slug}
+          class="gallery-item"
+          type="button"
+          data-index={index}
+          data-full={visual.image.src}
+          data-alt={visual.caption || visual.title}
+        >
+          <Image src={visual.image} alt={visual.caption || visual.title} widths={[360, 540, 760, 980]} sizes="(max-width: 560px) 100vw, (max-width: 820px) 50vw, 33vw" loading="lazy" />
+          {visual.caption && <span class="caption">{visual.caption}</span>}
+        </button>
+      ))}
+    </div>
+    <div class="lightbox" data-lightbox aria-modal="true" role="dialog" aria-label="Visual viewer">
+      <button class="lightbox-close" type="button" data-close aria-label="Close">×</button>
+      <button class="lightbox-prev" type="button" data-prev aria-label="Previous visual">‹</button>
+      <img data-lightbox-image alt="" />
+      <button class="lightbox-next" type="button" data-next aria-label="Next visual">›</button>
+    </div>
+  </>
+) : (
+  <p class="empty-note">Add image files to the root <code>/images</code> directory and they will appear here automatically.</p>
+)}
+
+<script>
+  const items = [...document.querySelectorAll("[data-gallery] [data-index]")] as HTMLElement[];
+  const lightbox = document.querySelector("[data-lightbox]") as HTMLElement | null;
+  const image = document.querySelector("[data-lightbox-image]") as HTMLImageElement | null;
+  const closeButton = document.querySelector("[data-close]");
+  const prevButton = document.querySelector("[data-prev]");
+  const nextButton = document.querySelector("[data-next]");
+  let current = 0;
+
+  function show(index: number) {
+    if (!lightbox || !image || items.length === 0) return;
+    current = (index + items.length) % items.length;
+    const item = items[current];
+    image.src = item.dataset.full ?? "";
+    image.alt = item.dataset.alt ?? "";
+    lightbox.dataset.open = "true";
+    document.body.style.overflow = "hidden";
+  }
+
+  function close() {
+    if (!lightbox || !image) return;
+    lightbox.dataset.open = "false";
+    image.removeAttribute("src");
+    document.body.style.overflow = "";
+  }
+
+  for (const item of items) {
+    item.addEventListener("click", () => show(Number(item.dataset.index ?? 0)));
+  }
+
+  closeButton?.addEventListener("click", close);
+  prevButton?.addEventListener("click", () => show(current - 1));
+  nextButton?.addEventListener("click", () => show(current + 1));
+  lightbox?.addEventListener("click", (event) => {
+    if (event.target === lightbox) close();
+  });
+
+  window.addEventListener("keydown", (event) => {
+    if (lightbox?.dataset.open !== "true") return;
+    if (event.key === "Escape") close();
+    if (event.key === "ArrowLeft") show(current - 1);
+    if (event.key === "ArrowRight") show(current + 1);
+  });
+</script>

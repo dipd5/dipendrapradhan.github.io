@@ -1,0 +1,16 @@
+---
+import BaseLayout from "@layouts/BaseLayout.astro";
+import ArchiveList from "@components/ArchiveList.astro";
+import { getArchiveEntries } from "@lib/archive";
+
+const entries = await getArchiveEntries();
+---
+
+<BaseLayout title="Archive — Dipendra Pradhan" description="A chronological stream of visuals and stories by Dipendra Pradhan.">
+  <section class="page-intro">
+    <p class="eyebrow">Archive</p>
+    <h1>The chronological heart of the garden.</h1>
+    <p class="lede">Visuals and stories appear together here, arranged for wandering rather than sorting.</p>
+  </section>
+  <ArchiveList entries={entries} />
+</BaseLayout>

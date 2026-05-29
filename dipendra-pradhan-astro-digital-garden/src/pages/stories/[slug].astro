@@ -1,0 +1,52 @@
+---
+import BaseLayout from "@layouts/BaseLayout.astro";
+import { render } from "astro:content";
+import { getStories } from "@lib/archive";
+import { formatGardenDate } from "@lib/date";
+import { getReadingTime } from "@lib/readingTime";
+
+export async function getStaticPaths() {
+  const stories = await getStories();
+  return stories.map((story) => ({ params: { slug: story.id }, props: { story } }));
+}
+
+const { story } = Astro.props;
+const stories = await getStories();
+const index = stories.findIndex((item) => item.id === story.id);
+const previous = stories[index + 1];
+const next = stories[index - 1];
+const { Content, headings } = await render(story);
+const longEnoughForToc = headings.length >= 2;
+---
+
+<BaseLayout title={`${story.data.title} — Dipendra Pradhan`} description={story.data.description}>
+  <article class="reading-layout">
+    <div>
+      <header class="page-intro">
+        <p class="eyebrow">Story</p>
+        <h1>{story.data.title}</h1>
+        <p class="meta">{formatGardenDate(story.data.pubDate)} · {getReadingTime(story.body ?? "")}</p>
+      </header>
+
+      <div class="prose">
+        <Content />
+      </div>
+
+      <nav class="story-nav" aria-label="Story navigation">
+        <span>
+          {previous && <a href={`/stories/${previous.id}/`}><span class="meta">Previous</span><br />{previous.data.title}</a>}
+        </span>
+        <span>
+          {next && <a href={`/stories/${next.id}/`}><span class="meta">Next</span><br />{next.data.title}</a>}
+        </span>
+      </nav>
+    </div>
+
+    {longEnoughForToc && (
+      <aside class="toc" aria-label="Table of contents">
+        <span class="eyebrow">Contents</span>
+        {headings.map((heading: { slug: string; text: string }) => <a href={`#${heading.slug}`}>{heading.text}</a>)}
+      </aside>
+    )}
+  </article>
+</BaseLayout>
