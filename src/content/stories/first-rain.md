@@ -1,20 +1,21 @@
 ---
-title: "First Rain in a Quiet Lane"
-description: "A placeholder journal entry about weather, memory, and the small theatre of a street."
-pubDate: 2026-05-22
-featured: true
+title: "एक दुई दिनको एकान्त"
+description: "बादल, काग, वर्षा र प्रतीक्षाबीच बितेका केही दिनका नोटहरू।"
+publishDate: 2021-06-17
 ---
 
-The first rain does not arrive like an announcement. It begins as a change in the smell of the afternoon, a loosened note in the air, and then the street remembers how to shine.
+बिहानै उठेर बालक जान्छु। त्यो पहिलो घामको किरण पृथ्वीमा स्पर्श भएको हेर्न।
 
-There is a narrow lane where the light gathers after rain. Scooters pass slowly. A dog sleeps beneath a shuttered shop. Someone lifts a curtain and looks out as if the world has been revised.
+अस्ति सोमबार त बिहान साढे चारमै इन्द्रेणी लागेको थियो। फोटो खिचेको तपाईँलाई पठाउँ कि जस्तो लाग्यो, तर पठाइनँ। फोनको data कुनै बेला मात्र on गर्छु। तपाईँलाई लेखूँ जस्तो लाग्छ, फेरि लेख्दिनँ। हुन्छ नि त्यो *state of limbo*। हामीले discuss गरेका थियौँ त नि अस्ति?
 
-I keep returning to this kind of moment because it asks for very little. Look carefully, it says. Stay long enough for the ordinary to become specific.
+पारि बादल कुदिरहन्छ। अस्ति धम्बुआले पनि, "यो बादल कहाँ गएको होला?" भनेर सोधिरहनुभएको थियो।
 
-## A Small List
+त्यो अस्ति मैले भनेको थिएँ नि, हाम्रो घरअघाडि कागले गुँड लगाएको छ भनेर। मलाई त्यसका बच्चाहरू उडेको हेर्न मन परिसक्यो। मैले सोचेको भन्दा धेरै trust गर्ने रहेछ। म बसेकै बरन्डामा आएर डुलिरहन्छ।
 
-- The dark line where water collects beside the curb.
-- The sudden green of leaves after dust leaves them.
-- A cup of tea cooling on the windowsill.
+दिनभरि पानी परिरहन्छ। कुनै बेला camera लिएर video clipping लिन्छु, त कुनै बेला त्यसै हेरेर बसिरहन्छु—तारमा अड्किएका पानीका थोपाहरू कुदेर फुस्स झरेको। झर्दाझर्दै कहाँ हराउँछन्, हराउँछन्।
 
-This is placeholder writing for the garden. Future entries can migrate here from Hawrey Katha, carrying their dates, texture, and voice intact.
+अनि पनि, पानी रोकेपछि मेरो घरअघिको घरको terrace मा भँगेराहरू भुतभुते खेलिरहेका हुन्छन्।
+
+यस्तै चलिरहेको छ।
+
+के सोचिरहेको हुन्छु, चिसो हावाले थ्याप्प–थ्याप्प थप्पड हानेर जान्छ। झसङ्ग हुन्छु अनि।
