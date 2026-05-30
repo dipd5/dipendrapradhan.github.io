@@ -1,16 +1,13 @@
----
-import BaseLayout from "@layouts/BaseLayout.astro";
-import VisualGallery from "@components/VisualGallery.astro";
-import { getVisuals } from "@lib/visuals";
+<section class="page-intro">
+  <p class="eyebrow">Visuals</p>
 
-const visuals = getVisuals();
----
+  <h1>हिँड्दै जाँदा</h1>
 
-<BaseLayout title="Visuals — Dipendra Pradhan" description="An evolving body of visual work by Dipendra Pradhan.">
-  <section class="page-intro">
-    <p class="eyebrow">Visuals</p>
-    <h1>One evolving body of work.</h1>
-    <p class="lede">Images gathered without albums or categories, left to speak beside one another.</p>
-  </section>
-  <VisualGallery visuals={visuals} />
-</BaseLayout>
+  <p class="lede">
+    Images from walks, conversations, and quiet afternoons.
+  </p>
+
+  <p>
+    Things I stopped for. Things I didn't want to forget.
+  </p>
+</section>
