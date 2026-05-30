@@ -1,10 +1,8 @@
-   ---
-
+---
 title: "Delhi by Metro and Foot"
 description: "A memoir of wandering through Delhi one metro ride at a time."
 pubDate: 2024-05-12
--------------------
-
+---
 
 When I think of Delhi now, I don't remember it through monuments or famous landmarks.
 
